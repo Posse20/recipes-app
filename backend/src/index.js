@@ -30,6 +30,20 @@ app.post('/users', async(req, res) => {
  * RECIPES ENDPOINTS
  */
 
+app.get('/recipes', async (req, res) => {
+    try {
+        const recipes = await prisma.recipe.findMany({
+            include: {
+                author: true
+            }
+        });
+        res.json(recipes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error retrieving recipes' });
+    }
+})
+
 app.post('/recipes', async (req, res) => {
     try{
         const { title, authorId } = req.body;
