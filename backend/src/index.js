@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { prisma } from './lib/prisma.js'
 import authRoutes from './routes/auth.routes.js'
+import { authMiddleware } from './middlewares/auth.middleware.js';
 
 const app = express();
 
@@ -47,13 +48,13 @@ app.get('/recipes', async (req, res) => {
     }
 })
 
-app.post('/recipes', async (req, res) => {
+app.post('/recipes', authMiddleware, async (req, res) => {
     try{
         const { title, authorId } = req.body;
         const recipe = await prisma.recipe.create({
             data: {
                 title,
-                authorId
+                authorId: req.userId
             }
         });
 

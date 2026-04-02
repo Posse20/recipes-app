@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RecipesService } from '../../../../core/services/recipes';
+import { RecipesService } from '../../../../core/services/recipes/recipes';
 import { CommonModule } from '@angular/common';
 
 @Component({
