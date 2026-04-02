@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { prisma } from './lib/prisma.js'
+import authRoutes from './routes/auth.routes.js'
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.get('/', (req, res) => {
 /**
  * USER ENDPOINTS
  */
+
+app.use('/auth', authRoutes);
 
 app.post('/users', async(req, res) => {
     const user = await prisma.user.create({
