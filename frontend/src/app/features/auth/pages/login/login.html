@@ -1,15 +1,28 @@
-<h2>Login</h2>
-<form (ngSubmit)="onSubmit()">
-    <input
-        [value]="email()"
-        (input)="email.set($any($event.target).value)"
-        placeholder="Email"
-    />
-    <input
-        [value]="password()"
-        (input)="password.set($any($event.target).value)"
-        placeholder="Password"
-        type="password"
-    />
-    <button type="submit">Login</button>
-</form>
+<div class="container mt-5" style="max-width: 400px;">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Login</h2>
+            <form (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <input
+                        class="form-control"
+                        [value]="email()"
+                        (input)="email.set($any($event.target).value)"
+                        placeholder="Email"
+                    />
+                </div>
+                <div class="mb-3">
+                    <input
+                        class="form-control"
+                        [value]="password()"
+                        (input)="password.set($any($event.target).value)"
+                        placeholder="Password"
+                        type="password"
+                    />
+                </div>
+
+                <button class="btn btn-primary w-100" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

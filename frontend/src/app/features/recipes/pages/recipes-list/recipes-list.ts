@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RecipesService } from '../../../../core/services/recipes/recipes';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-list',
@@ -12,14 +13,18 @@ import { CommonModule } from '@angular/common';
 export class RecipesList implements OnInit {
 
   private _recipesService = inject(RecipesService);
+  private _router = inject(Router);
 
   recipes = signal<any[]>([]);
 
   ngOnInit(): void {
     this._recipesService.getRecipes().subscribe(data => {
-      console.log('data', data);
       this.recipes.set(data);
     })
+  }
+
+  protected goToCreateRecipe(){
+    this._router.navigate(['/recipes/create'])
   }
 
 }

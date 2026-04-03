@@ -1,1 +1,9 @@
+<nav class="navbar navbar-dark bg-dark px-4" *ngIf="!isLoginPage()">
+  <span class="navbar-brand">Recipes App</span>
+
+  <button class="btn btn-outline-light" (click)="logout()">
+    Logout
+  </button>
+</nav>
+
 <router-outlet />

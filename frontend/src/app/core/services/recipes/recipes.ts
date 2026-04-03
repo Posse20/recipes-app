@@ -15,4 +15,8 @@ export class RecipesService {
     return this.http.get(`${this._apiUrl}/recipes`);
   }
 
+  public createRecipe(title: string){
+    return this.http.post(`${this._apiUrl}/recipes`, { title });
+  }
+
 }

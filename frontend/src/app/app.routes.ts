@@ -4,13 +4,19 @@ import { authGuard } from './core/guards/auth-guard';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'recipes',
-        pathMatch: 'full'
+        canActivate: [authGuard],
+        loadComponent: () =>
+        import('./features/recipes/pages/recipes-list/recipes-list')
+            .then(m => m.RecipesList),
     },
     {
         path: 'recipes',
         loadComponent: () => import('./features/recipes/pages/recipes-list/recipes-list').then(m => m.RecipesList),
         canActivate: [authGuard]
+    },
+    {
+        path: 'recipes/create',
+        loadComponent: () => import('./features/recipes/pages/create-recipe/create-recipe').then(m => m.CreateRecipe)
     },
     {
         path: 'login',
