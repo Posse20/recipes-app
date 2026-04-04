@@ -16,6 +16,7 @@ export class RecipesList implements OnInit {
   private _router = inject(Router);
 
   recipes = signal<any[]>([]);
+  deletedSuccessAlert = signal<boolean>(false);
 
   ngOnInit(): void {
     this._recipesService.getRecipes().subscribe(data => {
@@ -24,7 +25,17 @@ export class RecipesList implements OnInit {
   }
 
   protected goToCreateRecipe(){
-    this._router.navigate(['/recipes/create'])
+    this._router.navigate(['/recipes/create']);
+  }
+
+  protected deleteRecipe(recipeId: number){
+    this._recipesService.deleteRecipe(recipeId).subscribe(() => {
+      this.deletedSuccessAlert.set(true);
+      this.recipes.update(val => val.filter(x => x.id !== recipeId));
+      setTimeout(() => {
+        this.deletedSuccessAlert.set(false);
+      }, 2000);
+    });
   }
 
 }

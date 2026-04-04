@@ -9,14 +9,18 @@ export class RecipesService {
   
   private http = inject(HttpClient);
   
-  private _apiUrl = 'http://localhost:3000';
+  private _apiUrl = 'http://localhost:3000/recipes';
 
   public getRecipes(): Observable<any> {
-    return this.http.get(`${this._apiUrl}/recipes`);
+    return this.http.get(`${this._apiUrl}/retrieve`);
   }
 
   public createRecipe(title: string){
-    return this.http.post(`${this._apiUrl}/recipes`, { title });
+    return this.http.post(`${this._apiUrl}/create`, { title });
+  }
+
+  public deleteRecipe(recipeId: number){
+    return this.http.post(`${this._apiUrl}/delete`, { recipeId })
   }
 
 }
