@@ -17,8 +17,19 @@ model User {
 model Recipe {
   id        Int      @id @default(autoincrement())
   title     String
+  process   String?
   createdAt DateTime @default(now())
 
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
+
+  ingredients Ingredient[]
+}
+
+model Ingredient {
+  id        Int     @id @default(autoincrement())
+  name      String
+  quantity  String
+  recipeId  Int
+  recipe    Recipe  @relation(fields: [recipeId], references: [id])
 }

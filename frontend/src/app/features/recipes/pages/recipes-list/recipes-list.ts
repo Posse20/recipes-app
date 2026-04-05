@@ -38,4 +38,8 @@ export class RecipesList implements OnInit {
     });
   }
 
+  protected goToRecipeDetail(recipeId: number) {
+    this._router.navigate(['/recipes/detail', recipeId])
+  }
+
 }

@@ -8,6 +8,7 @@ const recipesRouter = Router();
  * RECIPES ENDPOINTS
  */
 
+// GET ENDPOINTS
 recipesRouter.get('/retrieve', async (req, res) => {
     try {
         const recipes = await prisma.recipe.findMany({
@@ -20,15 +21,43 @@ recipesRouter.get('/retrieve', async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Error retrieving recipes' });
     }
-})
+});
 
+recipesRouter.get('/retrieveById/:id', async (req, res) => {
+    try {
+        const resourceId = Number(req.params.id);
+        const recipe = await prisma.recipe.findUnique({
+            where: { id: resourceId },
+            include: {
+                author: true
+            }
+        });
+        res.json(recipe)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error retrieving recipes by id' });
+    }
+
+});
+
+// POST ENPOINTS
 recipesRouter.post('/create', authMiddleware, async (req, res) => {
     try{
-        const { title, authorId } = req.body;
+        const { title, process, ingredients } = req.body;
         const recipe = await prisma.recipe.create({
             data: {
                 title,
-                authorId: req.userId
+                process,
+                authorId: req.userId,
+                ingredients: {
+                    create: ingredients.map(i => ({
+                        name: i.name,
+                        quantity: i.quantity
+                    }))
+                }
+            },
+            include: {
+                ingredients: true
             }
         });
 

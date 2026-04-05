@@ -15,8 +15,12 @@ export class RecipesService {
     return this.http.get(`${this._apiUrl}/retrieve`);
   }
 
-  public createRecipe(title: string){
-    return this.http.post(`${this._apiUrl}/create`, { title });
+  public getRecipeById(recipeId: number) {
+    return this.http.get(`${this._apiUrl}/retrieveById/${recipeId}`);
+  }
+
+  public createRecipe(body: any){
+    return this.http.post(`${this._apiUrl}/create`, body);
   }
 
   public deleteRecipe(recipeId: number){

@@ -16,7 +16,13 @@ export const routes: Routes = [
     },
     {
         path: 'recipes/create',
-        loadComponent: () => import('./features/recipes/pages/create-recipe/create-recipe').then(m => m.CreateRecipe)
+        loadComponent: () => import('./features/recipes/pages/create-recipe/create-recipe').then(m => m.CreateRecipe),
+        canActivate: [authGuard]
+    },
+    {
+        path:'recipes/detail/:id',
+        loadComponent: () => import('./features/recipes/pages/recipe-detail/recipe-detail').then(m => m.RecipeDetail),
+        canActivate: [authGuard]
     },
     {
         path: 'login',
