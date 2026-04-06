@@ -29,7 +29,8 @@ recipesRouter.get('/retrieveById/:id', async (req, res) => {
         const recipe = await prisma.recipe.findUnique({
             where: { id: resourceId },
             include: {
-                author: true
+                author: true,
+                ingredients: true
             }
         });
         res.json(recipe)
@@ -80,6 +81,41 @@ recipesRouter.post('/delete', authMiddleware, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error deleting recipe' });
+    }
+});
+
+recipesRouter.put('/edit/:id', authMiddleware, async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const { title, process, ingredients } = req.body;
+
+        // Delete ingredients, and recreate with the new ones
+        await prisma.ingredient.deleteMany({
+            where: {
+                recipeId: id
+            }
+        });
+
+        const updateRecipe = await prisma.recipe.update({
+            where: { id },
+            data: {
+                title,
+                process,
+                ingredients: {
+                    create: ingredients.map(x => ({
+                        name: x.name,
+                        quantity: x.quantity
+                    }))
+                }
+            },
+            include: {
+                ingredients: true
+            }
+        });
+        res.json(updateRecipe)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error updating recipe'});
     }
 })
 

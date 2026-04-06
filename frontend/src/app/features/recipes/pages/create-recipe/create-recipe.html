@@ -5,8 +5,8 @@
         <h2 class="mb-4"><i class="fa-solid fa-burger"></i> Crear Receta</h2>
 
         <div class="mt-2 justify-content-center d-flex flex-row gap-3">
-            <button class="btn btn-primary" (click)="selectedMode('manual')"><i class="fa-solid fa-egg"></i> Manualmente</button>
-            <button class="btn btn-primary" (click)="selectedMode('ia')"><i class="fa-solid fa-robot"></i> Con Ingredientes de la Nevera</button>
+            <button class="btn btn-outline-primary" (click)="selectedMode('manual')"><i class="fa-solid fa-egg"></i> Manualmente</button>
+            <button class="btn btn-outline-primary" (click)="selectedMode('ia')"><i class="fa-solid fa-robot"></i> Con Ingredientes de la Nevera</button>
         </div>
 
         @switch (mode()) {
@@ -45,20 +45,20 @@
                                 <div class="accordion-body">
                                     <div class="d-flex flex-row gap-3">
                                         <input
-                                            [value]="quantityInput()"
-                                            class="form-control"
-                                            placeholder="Cantidad"
-                                            (input)="quantityInput.set($any($event.target).value)"
-                                        />
-                                        <input
                                             [value]="ingredientInput()"
                                             class="form-control"
                                             placeholder="Ingrediente"
                                             (input)="ingredientInput.set($any($event.target).value)"
                                         />
+                                        <input
+                                            [value]="quantityInput()"
+                                            class="form-control"
+                                            placeholder="Cantidad"
+                                            (input)="quantityInput.set($any($event.target).value)"
+                                        />
                                     </div>
                                     <div class="d-flex justify-content-end mt-3">
-                                        <button class="btn btn-success" (click)="onAddIngredient()"><i class="fa-solid fa-plus"></i> Add</button>
+                                        <button class="btn btn-outline-success" (click)="onAddIngredient()"><i class="fa-solid fa-plus"></i> Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -67,11 +67,11 @@
                     <hr>
                     <div class="mt-3 d-inline-flex flex-column">
                         <ul class="list-group list-group-flush">
-                            @for (ingredient of ingredientsList(); track ingredient.ingredient) {
+                            @for (ingredient of ingredientsList(); track ingredient.name) {
                                 <li class="list-group-item">
                                     <div class="d-flex justify-content-between align-items-center gap-3">
-                                        <p class="mb-0 fst-italic"> <strong>{{ ingredient.ingredient }}</strong>: {{ ingredient.quantity }} </p>
-                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteIngredient(ingredient.ingredient)"><i class="fa-solid fa-trash-can"></i></button>
+                                        <p class="mb-0 fst-italic"> <strong>{{ ingredient.name }}</strong>: {{ ingredient.quantity }} </p>
+                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteIngredient(ingredient.name)"><i class="fa-solid fa-trash-can"></i></button>
                                     </div>
                                 </li>
                             }
@@ -87,14 +87,14 @@
             }
             @case ('ia') {
                 <div class="mb-3">
-                    <label class="form-label">In Progress...</label>
+                    <label class="form-label">En Progreso...</label>
                 </div>
             }
         }
 
         <div class="d-flex justify-content-end">
-            <button class="btn btn-danger me-2" (click)="goToRecipes()"><i class="fa-regular fa-circle-xmark"></i> Cancelar</button>
-            <button class="btn btn-success" (click)="createRecipe()"><i class="fa-solid fa-bookmark"></i> Guardar Receta</button>
+            <button class="btn btn-outline-danger me-2" (click)="goToRecipes()"><i class="fa-regular fa-circle-xmark"></i> Cancelar</button>
+            <button class="btn btn-outline-success" (click)="createRecipe()"><i class="fa-solid fa-bookmark"></i> Guardar Receta</button>
         </div>
     </div>
 

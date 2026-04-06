@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RecipesService } from '../../../../core/services/recipes/recipes';
 import { Router } from '@angular/router';
-import { IngredientsDetail } from '../../../../models/recipe-detail/IngredientsDetail';
 
 @Component({
   selector: 'app-create-recipe',
@@ -19,14 +18,14 @@ export class CreateRecipe {
   public ingredientInput = signal<string>('');
   public quantityInput = signal<string>('');
   public process = signal<string>('');
-  public ingredientsList = signal<IngredientsDetail[]>([]);
+  public ingredientsList = signal<{name: string; quantity: string;}[]>([]);
 
   protected createRecipe(){
     const body = {
       title: this.title(),
       process: this.process(),
       ingredients: this.ingredientsList().map(i => ({
-        name: i.ingredient,
+        name: i.name,
         quantity: i.quantity
       }))
     };
@@ -51,9 +50,9 @@ export class CreateRecipe {
   }
 
   protected onAddIngredient(){
-    const ingredientDet: IngredientsDetail = {
+    const ingredientDet = {
       quantity: this.quantityInput(),
-      ingredient: this.ingredientInput()
+      name: this.ingredientInput()
     };
     this.ingredientsList.update(prevVal => [ ...prevVal, ingredientDet ]);
     this.quantityInput.set('');
@@ -61,7 +60,7 @@ export class CreateRecipe {
   }
 
   protected deleteIngredient(ingredient: string){
-    this.ingredientsList.update(list => list.filter(x => x.ingredient !== ingredient));
+    this.ingredientsList.update(list => list.filter(x => x.name !== ingredient));
   }
 
 }

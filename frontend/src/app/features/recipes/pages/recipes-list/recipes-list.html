@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2><i class="fa-solid fa-utensils"></i> Recetas</h2>
-        <button class="btn btn-secondary" (click)="goToCreateRecipe()"><i class="fa-solid fa-plus"></i> Agregar Receta</button>
+        <button class="btn btn-outline-success" (click)="goToCreateRecipe()"><i class="fa-solid fa-plus"></i> Agregar Receta</button>
     </div>
 
     <div class="row">
@@ -9,10 +9,31 @@
             <div class="col-md-4 mb-3">
                     <div class="card shadow-sm h-100">
                         <div class="card-body position-relative">
+                            <button class="btn btn-light btn-sm favorite-btn" (click)="toggleFavorite(recipe.id)">
+                                <i
+                                    [class.fa-solid]="isFavorite(recipe.id)"
+                                    [class.fa-regular]="!isFavorite(recipe.id)"
+                                    [class.text-danger]="isFavorite(recipe.id)"
+                                    class="fa-heart"></i>
+                            </button>
                             <h3 class="card-title">{{ recipe.title }}</h3>
                             <p class="card-text">Autor: {{ recipe.author.email }}</p>
-                            <a class="btn btn-link btn-sm mt-2" (click)="goToRecipeDetail(recipe.id)">Ver más</a>
-                            <button class="btn btn-danger position-absolute bottom-0 end-0 m-2" (click)="deleteRecipe(recipe.id)"><i class="fa-solid fa-trash-can"></i></button>
+                            <p class="card-text">Creado: {{ recipe.createdAt | date:'longDate' }}</p>
+                        
+                            <div class="d-flex gap-2 mt-3">
+                                <a class="btn btn-outline-secondary btn-sm" (click)="goToRecipeDetail(recipe.id)">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+
+                                <a class="btn btn-outline-secondary btn-sm" (click)="goToEditRecipe(recipe.id)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+
+                                <button class="btn btn-outline-danger btn-sm" (click)="deleteRecipe(recipe.id)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
             </div>

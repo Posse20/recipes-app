@@ -2,15 +2,30 @@
     @if (recipeDetail() !== null) {
         <div class="card shadow-sm h-100">
             <div class="card-body position-relative">
-                <h3 class="card-title">{{ recipeDetail().title }}</h3>
-                <p class="card-text">Autor: {{ recipeDetail().author.email }}</p>
+                <div class="container d-flex flex-column">
+                    <h3 class="card-title">{{ recipeDetail()?.title }}</h3>
+                    <p class="card-text">Autor: {{ recipeDetail()?.author?.email }}</p>
+                    <p class="card-text">Creado: {{ recipeDetail()?.createdAt | date:'longDate' }}</p>
+                </div>
 
                 <hr>
 
-                <p>Ingredientes ...</p>
+                <div class="container d-flex flex-column">
+                    <h4 class="card-title my-4"><i class="fa-solid fa-spoon"></i> Ingredientes: </h4>
+                    @for (ingredient of recipeDetail()?.ingredients; track ingredient.id) {
+                        <p class="mb-0 fst-italic"><strong>{{ ingredient.name }}</strong>: {{ ingredient.quantity }}</p>
+                    }
+                </div>
 
-                <button class="btn btn-secondary" (click)="backToRecipes()">
-                    <i class="fa-solid fa-arrow-left"></i>
+                <hr>
+
+                <div class="container d-flex flex-column">
+                    <h4 class="card-title my-4"><i class="fa-brands fa-readme"></i> Procedimiento: </h4>
+                    <p class="mb-0 fst-italic">{{ recipeDetail()?.process }}</p>
+                </div>
+
+                <button class="btn btn-outline-secondary mt-4" (click)="backToRecipes()">
+                    <i class="fa-solid fa-arrow-left"></i> Volver
                 </button>
             </div>
         </div>

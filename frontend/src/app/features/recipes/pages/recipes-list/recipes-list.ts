@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RecipesService } from '../../../../core/services/recipes/recipes';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,11 +17,12 @@ export class RecipesList implements OnInit {
 
   recipes = signal<any[]>([]);
   deletedSuccessAlert = signal<boolean>(false);
+  favoriteRecipes = signal<number[]>([]);
 
   ngOnInit(): void {
     this._recipesService.getRecipes().subscribe(data => {
       this.recipes.set(data);
-    })
+    });
   }
 
   protected goToCreateRecipe(){
@@ -40,6 +41,18 @@ export class RecipesList implements OnInit {
 
   protected goToRecipeDetail(recipeId: number) {
     this._router.navigate(['/recipes/detail', recipeId])
+  }
+
+  protected goToEditRecipe(recipeId: number) {
+    this._router.navigate(['/recipes/edit', recipeId])
+  }
+
+  protected toggleFavorite(id: number){
+    this.favoriteRecipes.update(list => list.includes(id) ? list.filter(x => x !== id) : [...list, id]);
+  }
+
+  protected isFavorite(id: number) {
+    return this.favoriteRecipes().includes(id);
   }
 
 }
