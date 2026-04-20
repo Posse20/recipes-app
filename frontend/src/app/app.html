@@ -1,6 +1,35 @@
 @if (!isLoginPage()) {
   <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">Recipes App</span>
+    <span class="navbar-brand fw-bold">
+      <i class="fa-solid fa-utensils"></i>
+    </span>
+
+    <div class="d-flex align-items-center gap-3">
+      <a 
+        class="nav-link text-white"
+        href="/"
+      >
+        Home
+      </a>
+      <a 
+        class="nav-link text-white"
+        href="/my-recipes"
+      >
+        Mis Recetas
+      </a>
+      <a 
+        class="nav-link text-white"
+        href="/favorite-recipes"
+      >
+        Mis Favoritas
+      </a>
+    </div>
+
+    <div class="ms-auto"></div>
+
+    <span class="navbar-text me-2">
+      Hola {{ userEmail() }}
+    </span>
 
     <button class="btn btn-outline-light" (click)="logout()">
       Logout

@@ -13,8 +13,14 @@ export class App {
   private auth = inject(AuthService);
   private router = inject(Router);
 
+  protected userEmail = signal<string>('');
+
+  constructor(){
+    this.userEmail.set(localStorage.getItem('email') ?? '');
+  }
+
   isLoginPage() {
-    return this.router.url === '/login';
+    return this.router.url === '/login' || this.router.url === '/register';
   }
 
   logout() {

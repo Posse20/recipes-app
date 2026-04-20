@@ -1,0 +1,21 @@
+.navbar {
+  height: 60px;
+}
+
+.nav-link {
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Hover bonito */
+.nav-link:hover {
+  color: #ffc107 !important;
+}
+
+/* Tab activa */
+.active-link {
+  color: #ffc107 !important;
+  font-weight: 600;
+  border-bottom: 2px solid #ffc107;
+}

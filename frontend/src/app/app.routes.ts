@@ -25,6 +25,11 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'my-recipes',
+        loadComponent: () => import('./features/recipes/pages/my-recipes/my-recipes').then(m => m.MyRecipes),
+        canActivate: [authGuard]
+    },
+    {
         path: 'recipes/edit/:id',
         loadComponent: () => import('./features/recipes/pages/edit-recipe/edit-recipe').then(m => m.EditRecipe),
         canActivate: [authGuard]
@@ -33,5 +38,9 @@ export const routes: Routes = [
         path: 'login',
         loadComponent: () =>
             import('./features/auth/pages/login/login').then(m => m.Login),
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./features/auth/pages/register/register').then(m => m.Register)
     }
 ];

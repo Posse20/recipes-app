@@ -22,7 +22,7 @@ export class Login {
   protected onSubmit() {
     this._authService.login(this.email(), this.password()).subscribe({
       next: (res) => {
-        this._authService.saveToken(res.token);
+        this._authService.saveToken(res.token, res.user.email, res.user.id );
         this._router.navigate(['/recipes']);
       },
       error: (err) => {

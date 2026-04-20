@@ -41,6 +41,22 @@ recipesRouter.get('/retrieveById/:id', async (req, res) => {
 
 });
 
+recipesRouter.get('/retrieveByUserId/:id', async (req, res) => {
+    try {
+        const userId = Number(req.params.id);
+        const recipes = await prisma.recipe.findMany({
+            where: {
+                authorId: userId
+            }
+        });
+        res.json(recipes)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error retrieving recipes by id' });
+    }
+
+});
+
 // POST ENPOINTS
 recipesRouter.post('/create', authMiddleware, async (req, res) => {
     try{

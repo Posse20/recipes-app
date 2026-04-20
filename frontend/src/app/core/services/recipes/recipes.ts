@@ -20,6 +20,10 @@ export class RecipesService {
     return this.http.get<RecipeDetail>(`${this._apiUrl}/retrieveById/${recipeId}`);
   }
 
+  public getRecipesByUserId(userId: number) {
+    return this.http.get(`${this._apiUrl}/retrieveByUserId/${userId}`)
+  }
+
   public createRecipe(body: any){
     return this.http.post(`${this._apiUrl}/create`, body);
   }
