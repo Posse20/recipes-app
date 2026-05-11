@@ -16,11 +16,11 @@ export class RecipesService {
     return this.http.get(`${this._apiUrl}/retrieve`);
   }
 
-  public getRecipeById(recipeId: number): Observable<RecipeDetail> {
-    return this.http.get<RecipeDetail>(`${this._apiUrl}/retrieveById/${recipeId}`);
+  public getRecipeById(recipeId: number): Observable<any> {
+    return this.http.get<any>(`${this._apiUrl}/retrieveById/${recipeId}`);
   }
 
-  public getRecipesByUserId(userId: number) {
+  public getRecipesByUserId(userId: number): Observable<any> {
     return this.http.get(`${this._apiUrl}/retrieveByUserId/${userId}`)
   }
 

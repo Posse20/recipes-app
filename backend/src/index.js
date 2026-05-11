@@ -3,6 +3,7 @@ import cors from 'cors';
 import { prisma } from './lib/prisma.js'
 import authRoutes from './routes/auth.routes.js'
 import recipesRouter from './routes/recipes.routes.js';
+import favoritesRouter from './routes/favorites.routes.js'
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use('/auth', authRoutes);
  */
 
 app.use('/recipes', recipesRouter);
+
+app.use('/favorites', favoritesRouter);
 
 app.listen(3000, () => {
   console.log('Server on http://localhost:3000');

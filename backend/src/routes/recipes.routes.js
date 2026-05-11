@@ -47,6 +47,10 @@ recipesRouter.get('/retrieveByUserId/:id', async (req, res) => {
         const recipes = await prisma.recipe.findMany({
             where: {
                 authorId: userId
+            },
+            include: {
+                author: true,
+                ingredients: true
             }
         });
         res.json(recipes)
