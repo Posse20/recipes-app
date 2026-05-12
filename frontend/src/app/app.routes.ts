@@ -30,6 +30,11 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'favorite-recipes',
+        loadComponent: () => import('./features/recipes/pages/recipes-favs/recipes-favs').then(m => m.RecipesFavsComponent),
+        canActivate: [authGuard]
+    },
+    {
         path: 'recipes/edit/:id',
         loadComponent: () => import('./features/recipes/pages/edit-recipe/edit-recipe').then(m => m.EditRecipe),
         canActivate: [authGuard]

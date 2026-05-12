@@ -43,7 +43,7 @@ favoritesRouter.delete('/:recipeId', authMiddleware, async(req, res) => {
         const recipeId = Number(req.params.recipeId);
         await prisma.favorite.deleteMany({
             where: {
-                userId = req.userId,
+                userId: req.userId,
                 recipeId
             }
         });
@@ -57,7 +57,7 @@ favoritesRouter.delete('/:recipeId', authMiddleware, async(req, res) => {
 
 });
 
-favoritesRouter.get('/', authMiddleware, async(res, res) => {
+favoritesRouter.get('/', authMiddleware, async(req, res) => {
 
     try {
         const favorites = await prisma.favorite.findMany({
@@ -82,3 +82,5 @@ favoritesRouter.get('/', authMiddleware, async(res, res) => {
     }
 
 })
+
+export default favoritesRouter;

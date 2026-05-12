@@ -4,6 +4,7 @@ import { prisma } from './lib/prisma.js'
 import authRoutes from './routes/auth.routes.js'
 import recipesRouter from './routes/recipes.routes.js';
 import favoritesRouter from './routes/favorites.routes.js'
+import userProfileRouter from './routes/user-profile.routes.js'
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.use('/auth', authRoutes);
 app.use('/recipes', recipesRouter);
 
 app.use('/favorites', favoritesRouter);
+
+app.use('/users', userProfileRouter);
 
 app.listen(3000, () => {
   console.log('Server on http://localhost:3000');

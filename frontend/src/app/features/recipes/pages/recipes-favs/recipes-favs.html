@@ -1,0 +1,20 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fa-solid fa-star"></i> Mis Recetas Favoritas</h2>
+    </div>
+    <ul class="list-group">
+        @for(recipe of recipesFavsList(); track recipe.title){
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ recipe.title }}</span>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-outline-secondary btn-sm" (click)="goToRecipeDetail(recipe.id)">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <button class="btn btn-outline-danger btn-sm favorite-btn" (click)="removeFavorite(recipe.id)">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </button>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
