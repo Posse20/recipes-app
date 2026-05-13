@@ -9,6 +9,17 @@ export const routes: Routes = [
         import('./features/recipes/pages/recipes-list/recipes-list')
             .then(m => m.RecipesList),
     },
+    // AUTH
+    {
+        path: 'login',
+        loadComponent: () =>
+            import('./features/auth/pages/login/login').then(m => m.Login),
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./features/auth/pages/register/register').then(m => m.Register)
+    },
+    // RECIPES
     {
         path: 'recipes',
         loadComponent: () => import('./features/recipes/pages/recipes-list/recipes-list').then(m => m.RecipesList),
@@ -25,6 +36,11 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'recipes/edit/:id',
+        loadComponent: () => import('./features/recipes/pages/edit-recipe/edit-recipe').then(m => m.EditRecipe),
+        canActivate: [authGuard]
+    },
+    {
         path: 'my-recipes',
         loadComponent: () => import('./features/recipes/pages/my-recipes/my-recipes').then(m => m.MyRecipes),
         canActivate: [authGuard]
@@ -34,18 +50,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/recipes/pages/recipes-favs/recipes-favs').then(m => m.RecipesFavsComponent),
         canActivate: [authGuard]
     },
+    // USER PROFILE
     {
-        path: 'recipes/edit/:id',
-        loadComponent: () => import('./features/recipes/pages/edit-recipe/edit-recipe').then(m => m.EditRecipe),
+        path:'profile',
+        loadComponent: () => import('./features/profile/pages/user-profile/user-profile').then(m => m.UserProfileComponent),
         canActivate: [authGuard]
-    },
-    {
-        path: 'login',
-        loadComponent: () =>
-            import('./features/auth/pages/login/login').then(m => m.Login),
-    },
-    {
-        path: 'register',
-        loadComponent: () => import('./features/auth/pages/register/register').then(m => m.Register)
     }
 ];

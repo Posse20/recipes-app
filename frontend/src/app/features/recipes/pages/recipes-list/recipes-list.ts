@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { RecipesService } from '../../../../core/services/recipes/recipes';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { FavoritesServices } from '../../../../core/services/favorites';
+import { FavoritesServices } from '../../../../core/services/favorites/favorites';
 
 @Component({
   selector: 'app-recipes-list',

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { FavoritesServices } from '../../../../core/services/favorites';
+import { FavoritesServices } from '../../../../core/services/favorites/favorites';
 import { Router } from '@angular/router';
 
 @Component({
