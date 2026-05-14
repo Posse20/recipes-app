@@ -55,5 +55,11 @@ export const routes: Routes = [
         path:'profile',
         loadComponent: () => import('./features/profile/pages/user-profile/user-profile').then(m => m.UserProfileComponent),
         canActivate: [authGuard]
+    },
+    // FRIDGE
+    {
+        path: 'my-fridge',
+        loadComponent: () => import('./features/fridge/my-fridge/my-fridge').then(m => m.MyFridgeComponent),
+        canActivate: [authGuard]
     }
 ];
