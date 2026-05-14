@@ -19,7 +19,6 @@ export class MyRecipes implements OnInit {
     const userId = Number(localStorage.getItem('userId'));
     this._recipesService.getRecipesByUserId(userId).subscribe({
       next: res => {
-        console.log('recetas x user', res);
         this.myRecipes.set(res);
       }
     })

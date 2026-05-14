@@ -12,8 +12,8 @@ export class RecipesService {
   
   private _apiUrl = 'http://localhost:3000/recipes';
 
-  public getRecipes(): Observable<any> {
-    return this.http.get(`${this._apiUrl}/retrieve`);
+  public getRecipes(): Observable<RecipeDetail[]> {
+    return this.http.get<RecipeDetail[]>(`${this._apiUrl}/retrieve`);
   }
 
   public getRecipeById(recipeId: number): Observable<any> {

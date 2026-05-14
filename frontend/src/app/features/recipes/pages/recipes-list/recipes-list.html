@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2><i class="fa-solid fa-earth-americas"></i> Recetas de Todos</h2>
+        <h2><i class="fa-solid fa-earth-americas me-1"></i> Descubre Recetas </h2>
         <button class="btn btn-outline-success" (click)="goToCreateRecipe()"><i class="fa-solid fa-plus"></i> Agregar Receta</button>
     </div>
 
@@ -17,7 +17,12 @@
                                     class="fa-heart"></i>
                             </button>
                             <h3 class="card-title">{{ recipe.title }}</h3>
-                            <p class="card-text">Autor: {{ recipe.author.email }}</p>
+                            @if (recipe.author.firstName && recipe.author.lastName) {
+                                <p class="card-text">Autor: {{ recipe.author.firstName }} {{ recipe.author.lastName }}</p>
+                            }@else{
+                                <p class="card-text">Autor: {{ recipe.author.email }}</p>
+                            }
+                            
                             <p class="card-text">Creado: {{ recipe.createdAt | date:'longDate' }}</p>
                         
                             <div class="d-flex gap-2 mt-3">

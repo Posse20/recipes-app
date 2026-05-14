@@ -33,7 +33,6 @@ export class RecipeDetailComponent implements OnInit {
 
     this._recipeService.getRecipeById(this.recipeId()).subscribe(res => {
       this.recipeDetail.set(res);
-      console.log('recipe', this.recipeDetail());
     });
   }
 

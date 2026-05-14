@@ -1,21 +1,23 @@
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2><i class="fa-solid fa-earth-americas"></i> Mis Creaciones</h2>
-        <button class="btn btn-outline-success" (click)="goToCreateRecipe()"><i class="fa-solid fa-plus"></i> Agregar Receta</button>
+    <div class="card shadow-sm p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fa-solid fa-book me-1"></i> Recetas Creadas</h2>
+            <button class="btn btn-outline-success" (click)="goToCreateRecipe()"><i class="fa-solid fa-plus"></i> Agregar Receta</button>
+        </div>
+        <ul class="list-group">
+            @for(recipe of myRecipes(); track recipe.title){
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ recipe.title }}</span>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-secondary btn-sm" (click)="goToEditRecipe(recipe.id)">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <button class="btn btn-outline-danger btn-sm" (click)="deleteRecipe(recipe.id)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button> 
+                    </div>
+                </li>
+            }
+        </ul>
     </div>
-    <ul class="list-group">
-        @for(recipe of myRecipes(); track recipe.title){
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>{{ recipe.title }}</span>
-                <div class="d-flex gap-2">
-                    <a class="btn btn-outline-secondary btn-sm" (click)="goToEditRecipe(recipe.id)">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <button class="btn btn-outline-danger btn-sm" (click)="deleteRecipe(recipe.id)">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button> 
-                </div>
-            </li>
-        }
-    </ul>
 </div>

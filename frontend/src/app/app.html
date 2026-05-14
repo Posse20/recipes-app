@@ -1,44 +1,71 @@
 @if (!isLoginPage()) {
-  <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand fw-bold">
-      <i class="fa-solid fa-utensils"></i>
-    </span>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow-sm">
+    <!-- LOGO -->
+     <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/">
+        <span>Logo App</span>
+     </a>
 
-    <div class="d-flex align-items-center gap-3">
-      <a 
-        class="nav-link text-white"
-        href="/"
-      >
-        Home
-      </a>
-      <a 
-        class="nav-link text-white"
-        routerLink="/my-recipes"
-        routerLinkActive="active-link"
-      >
-        Mis Recetas
-      </a>
-      <a 
-        class="nav-link text-white"
-        routerLink="/favorite-recipes"
-        routerLinkActive="active-link"
-      >
-        Mis Favoritas
-      </a>
-      <a 
-        class="nav-link text-white"
-        routerLink="/profile"
-        routerLinkActive="active-link"
-      >
-        Mi Perfil
-      </a>
-    </div>
+     <!-- LINKS -->
+      <div class="d-flex align-items-center ms-4 gap-3">
+        <a 
+          class="nav-link text-white"
+          routerLink="/"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="fa-solid fa-house me-1"></i>
+          Home
+        </a>
+      </div>
 
-    <div class="ms-auto"></div>
+      <div class="ms-auto dropdown">
 
-    <button class="btn btn-outline-light" (click)="logout()">
-      Logout
-    </button>
+        <button
+          class="btn btn-dark dropdown-toggle d-flex align-items-center gap-2"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-user"></i>
+          {{ nickName() }}
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+
+          <li>
+            <a class="dropdown-item" routerLink="/profile">
+              <i class="fa-solid fa-user me-2"></i>
+              Mi Perfil
+            </a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="/my-recipes">
+              <i class="fa-solid fa-book me-2"></i>
+              Mis Recetas
+            </a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="/favorite-recipes">
+              <i class="fa-solid fa-heart me-2"></i>
+              Mis Favoritas
+            </a>
+          </li>
+
+          <li><hr class="dropdown-divider"></li>
+
+          <li>
+            <button class="dropdown-item text-danger" (click)="logout()">
+              <i class="fa-solid fa-right-from-bracket me-2"></i>
+              Logout
+            </button>
+          </li>
+
+        </ul>
+
+      </div>
+
   </nav>
 }
 

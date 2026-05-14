@@ -1,21 +1,22 @@
-.navbar {
-  height: 60px;
-}
-
-.nav-link {
-  cursor: pointer;
-  position: relative;
-  padding-bottom: 4px;
-}
-
-/* Hover bonito */
-.nav-link:hover {
-  color: #ffc107 !important;
-}
-
-/* Tab activa */
 .active-link {
-  color: #ffc107 !important;
-  font-weight: 600;
-  border-bottom: 2px solid #ffc107;
+    color: #ffc107 !important;
+    font-weight: 600;
+}
+
+.navbar {
+    min-height: 64px;
+}
+
+.dropdown-menu {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.dropdown-item {
+    padding: 10px 16px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
 }

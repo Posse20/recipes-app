@@ -3,6 +3,7 @@ import { RecipesService } from '../../../../core/services/recipes/recipes';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FavoritesServices } from '../../../../core/services/favorites/favorites';
+import { RecipeDetail } from '../../../../models/recipe-detail/RecipeDetail';
 
 @Component({
   selector: 'app-recipes-list',
@@ -13,13 +14,15 @@ import { FavoritesServices } from '../../../../core/services/favorites/favorites
 })
 export class RecipesList implements OnInit {
 
+  // INJECTIONS
   private _recipesService = inject(RecipesService);
   private _router = inject(Router);
   private _favortiteService = inject(FavoritesServices);
 
-  recipes = signal<any[]>([]);
-  deletedSuccessAlert = signal<boolean>(false);
-  favoriteRecipesIds = signal<number[]>([]);
+  // SIGNALS
+  protected recipes = signal<RecipeDetail[]>([]);
+  protected deletedSuccessAlert = signal<boolean>(false);
+  private favoriteRecipesIds = signal<number[]>([]);
 
   ngOnInit(): void {
     this._retrieveAllRecipes();

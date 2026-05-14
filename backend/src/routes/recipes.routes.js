@@ -13,7 +13,8 @@ recipesRouter.get('/retrieve', async (req, res) => {
     try {
         const recipes = await prisma.recipe.findMany({
             include: {
-                author: true
+                author: true,
+                ingredients: true
             }
         });
         res.json(recipes);

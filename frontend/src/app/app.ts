@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { AuthService } from './core/services/auth/auth-service';
 import { CommonModule } from '@angular/common';
@@ -13,10 +13,27 @@ export class App {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  protected userEmail = signal<string>('');
+  protected nickName = signal<string>('');
 
   constructor(){
-    this.userEmail.set(localStorage.getItem('email') ?? '');
+    this._buildNameToShow();
+    effect(() => {
+      this.auth.userNameChanged();
+      this._buildNameToShow();
+    })
+  }
+
+  private _buildNameToShow(){
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const email = localStorage.getItem('email');
+
+    if(firstName && lastName){
+      this.nickName.set(`${firstName} ${lastName}`);
+    }else{
+      this.nickName.set(email ?? '');
+    }
+
   }
 
   isLoginPage() {
